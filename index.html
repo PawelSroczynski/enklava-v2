@@ -1,0 +1,311 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="robots" content="noindex, nofollow" />
+<title>Enklava — self-host your home</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><path d='M16 2l12 7v14l-12 7-12-7V9z' fill='%231A2332'/><path d='M16 9l6 3.5v7L16 23l-6-3.5v-7z' fill='none' stroke='%237BAFD4' stroke-width='1.6'/></svg>" />
+<style>
+  :root{
+    --bg:#0d1017; --bg2:#11151f; --card:#151b27; --line:#243049;
+    --ink:#e9edf5; --muted:#9aa6bd; --accent:#7BAFD4; --accent2:#e0a96d; --navy:#1A2332;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+  a{color:inherit}
+  .wrap{max-width:1060px;margin:0 auto;padding:0 24px}
+  .draft{position:relative;z-index:50;background:var(--accent2);color:#1a120b;text-align:center;font-size:12px;font-weight:600;letter-spacing:.04em;padding:6px}
+  /* nav */
+  nav{position:sticky;top:0;z-index:40;background:rgba(13,16,23,.82);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:60px}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:.02em}
+  .brand svg{width:26px;height:26px}
+  .nav-links{display:flex;gap:22px;font-size:14px;color:var(--muted)}
+  .nav-links a{text-decoration:none}.nav-links a:hover{color:var(--ink)}
+  @media(max-width:720px){.nav-links{display:none}}
+  /* hero */
+  .hero{padding:96px 0 72px;background:radial-gradient(900px 400px at 70% -10%,rgba(123,175,212,.14),transparent),var(--bg)}
+  .eyebrow{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600}
+  h1{font-size:clamp(38px,7vw,68px);line-height:1.04;margin:.3em 0 .25em;letter-spacing:-.02em}
+  .lead{font-size:clamp(17px,2.4vw,21px);color:var(--muted);max-width:640px}
+  .cta-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 22px;border-radius:10px;text-decoration:none;font-weight:600;font-size:15px;border:1px solid var(--line);transition:.15s}
+  .btn-primary{background:var(--accent);color:#0a1018;border-color:var(--accent)}
+  .btn-primary:hover{background:#9cc6e3}
+  .btn-ghost:hover{border-color:var(--accent);color:#fff}
+  /* sections */
+  section{padding:64px 0;border-top:1px solid var(--line)}
+  .kicker{font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:10px}
+  h2{font-size:clamp(26px,4vw,38px);line-height:1.12;margin:0 0 .4em;letter-spacing:-.01em}
+  .sub{color:var(--muted);max-width:660px;font-size:17px}
+  .grid{display:grid;gap:18px;margin-top:32px}
+  .g2{grid-template-columns:repeat(2,1fr)}.g3{grid-template-columns:repeat(3,1fr)}.g4{grid-template-columns:repeat(4,1fr)}
+  @media(max-width:860px){.g3,.g4{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:560px){.g2,.g3,.g4{grid-template-columns:1fr}}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px}
+  .card h3{margin:.1em 0 .35em;font-size:18px}
+  .card p{color:var(--muted);font-size:14.5px;margin:.2em 0}
+  /* levels */
+  .lvl{position:relative;display:flex;flex-direction:column}
+  .lvl .tag{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent2)}
+  .lvl .ask{margin-top:auto;padding-top:16px}
+  .lvl .ask a{display:inline-block;font-size:13.5px;font-weight:600;color:var(--accent);text-decoration:none;border:1px solid var(--line);border-radius:8px;padding:8px 14px}
+  .lvl .ask a:hover{border-color:var(--accent)}
+  .lvl .soon{color:var(--muted);font-size:12px;border:1px dashed var(--line);border-radius:8px;padding:8px 14px;display:inline-block}
+  /* flagship — the 'main' */
+  .flagship{border-color:var(--accent);background:linear-gradient(180deg,rgba(123,175,212,.12),var(--card));box-shadow:0 0 0 1px var(--accent),0 16px 44px -18px rgba(123,175,212,.6)}
+  .flag-badge{position:absolute;top:-11px;left:18px;background:var(--accent);color:#0a1018;font-size:10.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:4px 11px;border-radius:999px;box-shadow:0 4px 12px -4px rgba(123,175,212,.7)}
+  .flagship h3{color:#fff;font-size:19px}
+  .flagship .ask a{background:var(--accent);color:#0a1018;border-color:var(--accent)}
+  .flagship .ask a:hover{background:#9cc6e3}
+  /* mini cards → shared display (master/detail) */
+  .mini-grid{display:grid;gap:12px;margin-top:30px}
+  .mini-grid.c4{grid-template-columns:repeat(4,1fr)}.mini-grid.c3{grid-template-columns:repeat(3,1fr)}
+  @media(max-width:860px){.mini-grid.c4,.mini-grid.c3{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:520px){.mini-grid.c4,.mini-grid.c3{grid-template-columns:1fr}}
+  .mini-card{text-align:left;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 15px;cursor:pointer;color:var(--ink);font:inherit;display:flex;flex-direction:column;gap:5px;transition:.15s}
+  .mini-card:hover{border-color:var(--accent)}
+  .mini-card.active{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent),0 12px 30px -16px rgba(123,175,212,.65);background:linear-gradient(180deg,rgba(123,175,212,.09),var(--card))}
+  .mini-meta{font-size:11px;color:var(--accent);letter-spacing:.06em;text-transform:uppercase;display:flex;align-items:center;gap:6px}
+  .mini-title{font-size:15px;font-weight:600;line-height:1.25}
+  .display{display:grid;grid-template-columns:minmax(0,1.05fr) 1fr;gap:26px;margin-top:22px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px}
+  @media(max-width:760px){.display{grid-template-columns:1fr}}
+  .display-img{min-height:240px;border-radius:12px;border:1px solid var(--line);background:#0b0e14 center top/cover no-repeat;display:flex;align-items:center;justify-content:center}
+  .display-img.icon{font-size:68px;background:linear-gradient(135deg,rgba(123,175,212,.18),rgba(224,169,109,.12))}
+  .display-body{display:flex;flex-direction:column;justify-content:center}
+  .display-meta{font-size:12px;color:var(--accent);letter-spacing:.06em;text-transform:uppercase}
+  .display-title{margin:.2em 0 .45em;font-size:23px;line-height:1.15}
+  .display-desc{color:var(--muted);font-size:15px}
+  .display-link{align-self:flex-start;margin-top:18px;font-weight:600;color:var(--accent);text-decoration:none;border:1px solid var(--line);border-radius:8px;padding:9px 16px}
+  .display-link:hover{border-color:var(--accent)}
+  .pill{font-size:10px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;border-radius:999px;padding:2px 8px}
+  .pill.live{color:#0a1018;background:var(--accent)}
+  .pill.soon{color:var(--accent2);border:1px solid var(--line)}
+  /* method */
+  .method ul{color:var(--muted);font-size:16px;padding-left:20px;max-width:680px}
+  .method li{margin:.5em 0}
+  /* footer */
+  footer{border-top:1px solid var(--line);padding:56px 0 70px;text-align:center}
+  footer h2{margin-bottom:.3em}
+  .foot-note{color:var(--muted);font-size:13px;margin-top:30px}
+  .spine{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
+  .chip{font-size:12.5px;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:5px 13px}
+</style>
+</head>
+<body>
+<div class="draft">DRAFT · Enklava v2 — work in progress (staging)</div>
+
+<nav><div class="wrap nav">
+  <div class="brand">
+    <svg viewBox="0 0 32 32"><path d="M16 2l12 7v14l-12 7-12-7V9z" fill="#1A2332" stroke="#243049"/><path d="M16 9l6 3.5v7L16 23l-6-3.5v-7z" fill="none" stroke="#7BAFD4" stroke-width="1.6"/></svg>
+    Enklava
+  </div>
+  <div class="nav-links">
+    <a href="#what">What it is</a>
+    <a href="#levels">Ways in</a>
+    <a href="#proof">Tools</a>
+    <a href="#tech">Tech</a>
+    <a href="#method">Method</a>
+    <a href="#start">Start</a>
+  </div>
+</div></nav>
+
+<header class="hero"><div class="wrap">
+  <div class="eyebrow">Regenerative home ecosystem</div>
+  <h1>Self-host<br>your home.</h1>
+  <p class="lead">A home that puts you in control of your own resources — energy, water, food, nutrients and data. Not rented. Not remote. Yours.</p>
+  <div class="cta-row">
+    <a class="btn btn-primary" href="#proof">See it working →</a>
+    <a class="btn btn-ghost" href="#levels">How you engage</a>
+  </div>
+</div></header>
+
+<section id="problem"><div class="wrap">
+  <div class="kicker">The problem</div>
+  <h2>Your life runs on someone else's infrastructure.</h2>
+  <p class="sub">Power grid, municipal water, supermarket food, the cloud. Convenient — until it isn't. Each is a single point of failure outside your control: outages, prices, policy, distance. The default is to rent your own life-support from systems you can't see.</p>
+</div></section>
+
+<section id="what"><div class="wrap">
+  <div class="kicker">What it is</div>
+  <h2>Enklava is an ecosystem, not a product.</h2>
+  <p class="sub">A method, a set of tools, and a network that take you from <em>“I want to live differently”</em> to a built, resilient home you actually understand and control. The spine is a library of decision matrices that turn vague intent into clear requirements — so you become the person who knows what they want.</p>
+  <div class="spine">
+    <span class="chip">Structure</span><span class="chip">Energy</span><span class="chip">Water</span><span class="chip">Sanitation</span><span class="chip">Food &amp; nutrients</span><span class="chip">Data</span>
+  </div>
+</div></section>
+
+<section id="levels"><div class="wrap">
+  <div class="kicker">Ways in</div>
+  <h2>Come in by intent — not by rank.</h2>
+  <p class="sub">Pick the door that fits where you are. Nothing here is a prerequisite — but one of them is our flagship.</p>
+  <div class="grid g4">
+    <div class="card lvl">
+      <span class="tag">Free</span>
+      <h3>Explore</h3>
+      <p>Browse the vision and the live tools — no account, no commitment. Just look around.</p>
+      <div class="ask"><a href="#proof">Explore</a></div>
+    </div>
+    <div class="card lvl">
+      <span class="tag">Labs · community</span>
+      <h3>Join the community</h3>
+      <p>Enklava Labs is the community — become a member of the build/dev team: technology, BOM, SOPs, docs, inspiration and the people. For the tech-curious and the already-clear.</p>
+      <div class="ask"><a href="#start">Join Labs</a></div>
+    </div>
+    <div class="card lvl flagship">
+      <span class="flag-badge">★ Our flagship</span>
+      <span class="tag">Ku-Gotowości</span>
+      <h3>Get clear</h3>
+      <p>In a build and need to decide well? The deep work — order your whole context into clear decisions, with a cohort.</p>
+      <div class="ask"><a href="#start">Join a cohort</a></div>
+    </div>
+    <div class="card lvl">
+      <span class="tag">Ultra-HT</span>
+      <h3>Build with us</h3>
+      <p>Ready to implement in your own context, with vetted partners.</p>
+      <div class="ask"><span class="soon">Soon</span></div>
+    </div>
+  </div>
+</div></section>
+
+<section id="proof" class="proof"><div class="wrap">
+  <div class="kicker">Proof, not slides</div>
+  <h2>Tools overview.</h2>
+  <p class="sub">Working software behind the vision. Pick one — details open below.</p>
+  <div class="ov" data-display="toolsDisplay">
+    <div class="mini-grid c4">
+      <button class="mini-card"
+        data-img="img/tool-panelizer.png" data-meta="Configurator · 3D" data-title="StrawPanel &amp; Pizza Dome"
+        data-link="https://enklava.co/tools/panelizer/" data-linklabel="Open the tool ↗"
+        data-desc="Two construction systems in one configurator. Design a straw-panel building — four walls, floor, roof and gable ends — broken into prefab panels with typological labels, a live bill of materials, cost estimate and an indicative heating demand. Or switch to Pizza Dome mode to generate a Goldberg-polyhedron mould. Click any panel to inspect dimensions and angles; export STL, JSON and a spec PDF.">
+        <span class="mini-meta">Configurator · 3D</span><span class="mini-title">StrawPanel &amp; Pizza Dome</span>
+      </button>
+      <button class="mini-card"
+        data-img="img/tool-sitefit.png" data-meta="Tool · Geospatial" data-title="SiteFit"
+        data-link="https://enklava.co/tools/sitefit/" data-linklabel="Open the tool ↗"
+        data-desc="Plot feasibility before you commit. Import a parcel by number (ULDK) or draw it, then derive the buildable envelope and the key indicators — coverage, intensity, biologically-active area, setbacks — straight from the planning rules, with every number traceable to its legal source.">
+        <span class="mini-meta">Tool · Geospatial</span><span class="mini-title">SiteFit</span>
+      </button>
+      <button class="mini-card"
+        data-img="img/tool-atu.png" data-meta="Write-up · Data" data-title="ATU offline kit"
+        data-link="https://enklava.co/files/atu-offline-kit-JkkT/" data-linklabel="Read it ↗"
+        data-desc="What “self-hosting the data layer” actually looks like. A portable, offline, off-grid tech stack that gives you your own internet — knowledge, files, media, maps, local AI and comms — at ~30 W, a week per charge, indefinitely with solar. Full hardware + software stack with real prices.">
+        <span class="mini-meta">Write-up · Data</span><span class="mini-title">ATU offline kit</span>
+      </button>
+      <button class="mini-card"
+        data-img="img/tool-pilot.png" data-meta="Pilot · Due diligence" data-title="Sławek · Józefów"
+        data-link="https://enklava.co/files/slawek-jozefow-dd-analiza-ghkY/" data-linklabel="Read it ↗"
+        data-desc="The method on a real plot, not a hypothetical. A due-diligence analysis for Sławek's site in Józefów — the structured way we turn a raw parcel and its constraints into clear, decision-ready findings.">
+        <span class="mini-meta">Pilot · Due diligence</span><span class="mini-title">Sławek · Józefów</span>
+      </button>
+    </div>
+    <div class="display" id="toolsDisplay">
+      <div class="display-img"></div>
+      <div class="display-body">
+        <div class="display-meta"></div>
+        <h3 class="display-title"></h3>
+        <p class="display-desc"></p>
+        <a class="display-link" target="_blank" rel="noopener"></a>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<section id="tech"><div class="wrap">
+  <div class="kicker">The tech</div>
+  <h2>Tech overview — the infrastructure we develop.</h2>
+  <p class="sub">A home runs on a few systems. We build open, low-dependency answers for each, so you can own and self-host them. Pick a layer.</p>
+  <div class="ov" data-display="techDisplay">
+    <div class="mini-grid c3">
+      <button class="mini-card" data-img="img/layer-structure.png" data-icon="🧱" data-meta="Structure" data-title="StrawPanel" data-status="live"
+        data-desc="Our load-bearing envelope: prefab straw panels (twin-stud frame, straw infill, plywood plates) for walls, floor, roof and gable ends. Designed, panelised and costed in the configurator — our own catalogue, with EcoCocon only as a reference.">
+        <span class="mini-meta">Structure <span class="pill live">Live</span></span><span class="mini-title">StrawPanel envelope</span>
+      </button>
+      <button class="mini-card" data-img="img/layer-energy.png" data-icon="⚡" data-meta="Energy" data-title="Power" data-status="soon"
+        data-desc="Your own grid: solar harvest, battery storage and an honest power budget so the home runs off-grid. In development.">
+        <span class="mini-meta">Energy <span class="pill soon">In dev</span></span><span class="mini-title">Power</span>
+      </button>
+      <button class="mini-card" data-img="img/layer-water.png" data-icon="💧" data-meta="Water" data-title="Water" data-status="soon"
+        data-desc="Rainwater capture, filtration and greywater reuse with storage — reducing or removing dependence on mains. In development.">
+        <span class="mini-meta">Water <span class="pill soon">In dev</span></span><span class="mini-title">Water</span>
+      </button>
+      <button class="mini-card" data-img="img/layer-sanitation.png" data-icon="♻️" data-meta="Sanitation" data-title="Sanitation" data-status="soon"
+        data-desc="Composting and closed-loop handling of waste — no dependence on mains sewage. In development.">
+        <span class="mini-meta">Sanitation <span class="pill soon">In dev</span></span><span class="mini-title">Sanitation</span>
+      </button>
+      <button class="mini-card" data-img="img/layer-food.png" data-icon="🌱" data-meta="Food &amp; nutrients" data-title="Food &amp; nutrients" data-status="soon"
+        data-desc="Growing space and closing the nutrient loop back into the soil. In development.">
+        <span class="mini-meta">Food <span class="pill soon">In dev</span></span><span class="mini-title">Food &amp; nutrients</span>
+      </button>
+      <button class="mini-card" data-img="img/layer-data.png" data-icon="🛰️" data-meta="Data" data-title="Data &amp; compute" data-status="live"
+        data-link="https://enklava.co/files/atu-offline-kit-JkkT/" data-linklabel="See the ATU kit ↗"
+        data-desc="Self-hosted compute, knowledge and communications — the corner already proven in the ATU offline kit. Own your data.">
+        <span class="mini-meta">Data <span class="pill live">Live</span></span><span class="mini-title">Data &amp; compute</span>
+      </button>
+    </div>
+    <div class="display" id="techDisplay">
+      <div class="display-img"></div>
+      <div class="display-body">
+        <div class="display-meta"></div>
+        <h3 class="display-title"></h3>
+        <p class="display-desc"></p>
+        <a class="display-link" target="_blank" rel="noopener"></a>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<section id="method" class="method"><div class="wrap">
+  <div class="kicker">The method</div>
+  <h2>Why this isn't another off-grid brand.</h2>
+  <p class="sub">“Control your resources” is everyone's pitch. Ours is the <em>how</em>:</p>
+  <ul>
+    <li><strong>Matrices over manifestos.</strong> Ten decision matrices give you the language and map to define your own requirements.</li>
+    <li><strong>You decide, specialists orchestrate.</strong> The expert integrates your requirements — they don't decide for you.</li>
+    <li><strong>Value is in the transition.</strong> Not a glossy artefact, but the support, structure and ecosystem trust that get you across.</li>
+    <li><strong>Build at home, share structurally.</strong> Proven on real builds, then opened as reusable structure — not bespoke one-offs.</li>
+  </ul>
+</div></section>
+
+<footer id="start"><div class="wrap">
+  <div class="kicker">Start</div>
+  <h2>Pick your level.</h2>
+  <p class="sub" style="margin:0 auto">Read for free, join a cohort to get clear, access the Lab to build it yourself, or apply to build with us.</p>
+  <div class="cta-row" style="justify-content:center">
+    <a class="btn btn-primary" href="#proof">Explore the tools</a>
+    <a class="btn btn-ghost" href="#levels">See the levels</a>
+  </div>
+  <p class="foot-note">enklava.co · regenerative home ecosystem · v2 draft (staging, noindex)</p>
+</div></footer>
+
+<script>
+(function(){
+  document.querySelectorAll('[data-display]').forEach(function(group){
+    var disp=document.getElementById(group.dataset.display);
+    if(!disp) return;
+    var img=disp.querySelector('.display-img'),
+        meta=disp.querySelector('.display-meta'),
+        title=disp.querySelector('.display-title'),
+        desc=disp.querySelector('.display-desc'),
+        link=disp.querySelector('.display-link');
+    var cards=group.querySelectorAll('.mini-card');
+    function show(c){
+      cards.forEach(function(x){x.classList.remove('active');}); c.classList.add('active');
+      if(c.dataset.img){ img.classList.remove('icon'); img.textContent=''; img.style.backgroundImage='url('+c.dataset.img+')'; }
+      else { img.classList.add('icon'); img.style.backgroundImage=''; img.textContent=c.dataset.icon||''; }
+      meta.textContent=c.dataset.meta||'';
+      title.innerHTML=c.dataset.title||'';
+      desc.textContent=c.dataset.desc||'';
+      if(c.dataset.link){ link.style.display=''; link.href=c.dataset.link; link.textContent=c.dataset.linklabel||'Open ↗'; }
+      else { link.style.display='none'; }
+    }
+    cards.forEach(function(c){ c.addEventListener('click',function(){show(c);}); });
+    if(cards[0]) show(cards[0]); // default to first
+  });
+})();
+</script>
+
+</body>
+</html>
