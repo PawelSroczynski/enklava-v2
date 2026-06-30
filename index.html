@@ -22,6 +22,12 @@
   .nav{display:flex;align-items:center;justify-content:space-between;height:60px}
   .brand{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:.02em}
   .brand svg{width:26px;height:26px}
+  /* discreet language switch, next to the logo */
+  .lang{display:flex;align-items:center;gap:3px;margin-left:10px;font-size:12px;font-weight:500}
+  .lang button{background:none;border:0;color:var(--muted);cursor:pointer;font:inherit;padding:2px 4px;border-radius:5px;letter-spacing:.04em}
+  .lang button.on{color:var(--ink);font-weight:700}
+  .lang button:hover{color:var(--ink)}
+  .lang i{color:var(--line);font-style:normal}
   .nav-links{display:flex;gap:22px;font-size:14px;color:var(--muted)}
   .nav-links a{text-decoration:none}.nav-links a:hover{color:var(--ink)}
   @media(max-width:720px){.nav-links{display:none}}
@@ -95,110 +101,125 @@
 </style>
 </head>
 <body>
-<div class="draft">DRAFT · Enklava v2 — work in progress (staging)</div>
+<div class="draft" data-i18n="draft">DRAFT · Enklava v2 — work in progress (staging)</div>
 
 <nav><div class="wrap nav">
   <div class="brand">
     <svg viewBox="0 0 32 32"><path d="M16 2l12 7v14l-12 7-12-7V9z" fill="#1A2332" stroke="#243049"/><path d="M16 9l6 3.5v7L16 23l-6-3.5v-7z" fill="none" stroke="#7BAFD4" stroke-width="1.6"/></svg>
     Enklava
+    <span class="lang">
+      <button data-lang="en">EN</button><i>/</i><button data-lang="pl">PL</button>
+    </span>
   </div>
   <div class="nav-links">
-    <a href="#what">What it is</a>
-    <a href="#levels">Ways in</a>
-    <a href="#proof">Tools</a>
-    <a href="#tech">Tech</a>
-    <a href="#method">Method</a>
-    <a href="#start">Start</a>
+    <a href="#what" data-i18n="nav_what">What it is</a>
+    <a href="#levels" data-i18n="nav_ways">Ways in</a>
+    <a href="#proof" data-i18n="nav_tools">Tools</a>
+    <a href="#tech" data-i18n="nav_tech">Tech</a>
+    <a href="#method" data-i18n="nav_method">Method</a>
+    <a href="#start" data-i18n="nav_start">Start</a>
   </div>
 </div></nav>
 
 <header class="hero"><div class="wrap">
-  <div class="eyebrow">Regenerative home ecosystem</div>
-  <h1>Self-host<br>your home.</h1>
-  <p class="lead">A home that puts you in control of your own resources — energy, water, food, nutrients and data. Not rented. Not remote. Yours.</p>
+  <div class="eyebrow" data-i18n="hero_eyebrow">Regenerative home ecosystem</div>
+  <h1 data-i18n="hero_h1">Self-host<br>your home.</h1>
+  <p class="lead" data-i18n="hero_lead">A home that puts you in control of your own resources — energy, water, food, nutrients and data. Not rented. Not remote. Yours.</p>
   <div class="cta-row">
-    <a class="btn btn-primary" href="#proof">See it working →</a>
-    <a class="btn btn-ghost" href="#levels">How you engage</a>
+    <a class="btn btn-primary" href="#proof" data-i18n="hero_cta1">See it working →</a>
+    <a class="btn btn-ghost" href="#levels" data-i18n="hero_cta2">How you engage</a>
   </div>
 </div></header>
 
 <section id="problem"><div class="wrap">
-  <div class="kicker">The problem</div>
-  <h2>Your life runs on someone else's infrastructure.</h2>
-  <p class="sub">Power grid, municipal water, supermarket food, the cloud. Convenient — until it isn't. Each is a single point of failure outside your control: outages, prices, policy, distance. The default is to rent your own life-support from systems you can't see.</p>
+  <div class="kicker" data-i18n="prob_kicker">The problem</div>
+  <h2 data-i18n="prob_h2">Your life runs on someone else's infrastructure.</h2>
+  <p class="sub" data-i18n="prob_sub">Power grid, municipal water, supermarket food, the cloud. Convenient — until it isn't. Each is a single point of failure outside your control: outages, prices, policy, distance. The default is to rent your own life-support from systems you can't see.</p>
 </div></section>
 
 <section id="what"><div class="wrap">
-  <div class="kicker">What it is</div>
-  <h2>Enklava is an ecosystem, not a product.</h2>
-  <p class="sub">A method, a set of tools, and a network that take you from <em>“I want to live differently”</em> to a built, resilient home you actually understand and control. The spine is a library of decision matrices that turn vague intent into clear requirements — so you become the person who knows what they want.</p>
+  <div class="kicker" data-i18n="what_kicker">What it is</div>
+  <h2 data-i18n="what_h2">Enklava is an ecosystem, not a product.</h2>
+  <p class="sub" data-i18n="what_sub">A method, a set of tools, and a network that take you from <em>“I want to live differently”</em> to a built, resilient home you actually understand and control. The spine is a library of decision matrices that turn vague intent into clear requirements — so you become the person who knows what they want.</p>
   <div class="spine">
-    <span class="chip">Structure</span><span class="chip">Energy</span><span class="chip">Water</span><span class="chip">Sanitation</span><span class="chip">Food &amp; nutrients</span><span class="chip">Data</span>
+    <span class="chip" data-i18n="chip_structure">Structure</span><span class="chip" data-i18n="chip_energy">Energy</span><span class="chip" data-i18n="chip_water">Water</span><span class="chip" data-i18n="chip_sanitation">Sanitation</span><span class="chip" data-i18n="chip_food">Food &amp; nutrients</span><span class="chip" data-i18n="chip_data">Data</span>
   </div>
 </div></section>
 
 <section id="levels"><div class="wrap">
-  <div class="kicker">Ways in</div>
-  <h2>Come in by intent — not by rank.</h2>
-  <p class="sub">Pick the door that fits where you are. Nothing here is a prerequisite — but one of them is our flagship.</p>
+  <div class="kicker" data-i18n="lv_kicker">Ways in</div>
+  <h2 data-i18n="lv_h2">Come in by intent — not by rank.</h2>
+  <p class="sub" data-i18n="lv_sub">Pick the door that fits where you are. Nothing here is a prerequisite — but one of them is our flagship.</p>
   <div class="grid g4">
     <div class="card lvl">
-      <span class="tag">Free</span>
-      <h3>Explore</h3>
-      <p>Browse the vision and the live tools — no account, no commitment. Just look around.</p>
-      <div class="ask"><a href="#proof">Explore</a></div>
+      <span class="tag" data-i18n="lv1_tag">Free</span>
+      <h3 data-i18n="lv1_h3">Explore</h3>
+      <p data-i18n="lv1_p">Browse the vision and the live tools — no account, no commitment. Just look around.</p>
+      <div class="ask"><a href="#proof" data-i18n="lv1_cta">Explore</a></div>
     </div>
     <div class="card lvl">
-      <span class="tag">Labs · community</span>
-      <h3>Join the community</h3>
-      <p>Enklava Labs is the community — become a member of the build/dev team: technology, BOM, SOPs, docs, inspiration and the people. For the tech-curious and the already-clear.</p>
-      <div class="ask"><a href="#start">Join Labs</a></div>
+      <span class="tag" data-i18n="lv2_tag">Labs · community</span>
+      <h3 data-i18n="lv2_h3">Join the community</h3>
+      <p data-i18n="lv2_p">Enklava Labs is the community — become a member of the build/dev team: technology, BOM, SOPs, docs, inspiration and the people. For the tech-curious and the already-clear.</p>
+      <div class="ask"><a href="#start" data-i18n="lv2_cta">Join Labs</a></div>
     </div>
     <div class="card lvl flagship">
-      <span class="flag-badge">★ Our flagship</span>
-      <span class="tag">Ku-Gotowości</span>
-      <h3>Get clear</h3>
-      <p>In a build and need to decide well? The deep work — order your whole context into clear decisions, with a cohort.</p>
-      <div class="ask"><a href="#start">Join a cohort</a></div>
+      <span class="flag-badge" data-i18n="lv3_badge">★ Our flagship</span>
+      <span class="tag" data-i18n="lv3_tag">Ku-Gotowości</span>
+      <h3 data-i18n="lv3_h3">Get clear</h3>
+      <p data-i18n="lv3_p">In a build and need to decide well? The deep work — order your whole context into clear decisions, with a cohort.</p>
+      <div class="ask"><a href="#start" data-i18n="lv3_cta">Join a cohort</a></div>
     </div>
     <div class="card lvl">
-      <span class="tag">Ultra-HT</span>
-      <h3>Build with us</h3>
-      <p>Ready to implement in your own context, with vetted partners.</p>
-      <div class="ask"><span class="soon">Soon</span></div>
+      <span class="tag" data-i18n="lv4_tag">Ultra-HT</span>
+      <h3 data-i18n="lv4_h3">Build with us</h3>
+      <p data-i18n="lv4_p">Ready to implement in your own context, with vetted partners.</p>
+      <div class="ask"><span class="soon" data-i18n="lv4_soon">Soon</span></div>
     </div>
   </div>
 </div></section>
 
 <section id="proof" class="proof"><div class="wrap">
-  <div class="kicker">Proof, not slides</div>
-  <h2>Tools overview.</h2>
-  <p class="sub">Working software behind the vision. Pick one — details open below.</p>
+  <div class="kicker" data-i18n="proof_kicker">Proof, not slides</div>
+  <h2 data-i18n="proof_h2">Tools overview.</h2>
+  <p class="sub" data-i18n="proof_sub">Working software behind the vision. Pick one — details open below.</p>
   <div class="ov" data-display="toolsDisplay">
     <div class="mini-grid c4">
-      <button class="mini-card"
-        data-img="img/tool-panelizer.png" data-meta="Configurator · 3D" data-title="StrawPanel &amp; Pizza Dome"
-        data-link="https://enklava.co/tools/panelizer/" data-linklabel="Open the tool ↗"
-        data-desc="Two construction systems in one configurator. Design a straw-panel building — four walls, floor, roof and gable ends — broken into prefab panels with typological labels, a live bill of materials, cost estimate and an indicative heating demand. Or switch to Pizza Dome mode to generate a Goldberg-polyhedron mould. Click any panel to inspect dimensions and angles; export STL, JSON and a spec PDF.">
-        <span class="mini-meta">Configurator · 3D</span><span class="mini-title">StrawPanel &amp; Pizza Dome</span>
+      <button class="mini-card" data-img="img/tool-panelizer.png"
+        data-link="https://enklava.co/tools/panelizer/"
+        data-meta-en="Configurator · 3D" data-meta-pl="Konfigurator · 3D"
+        data-title-en="StrawPanel &amp; Pizza Dome" data-title-pl="StrawPanel &amp; Pizza Dome"
+        data-linklabel-en="Open the tool ↗" data-linklabel-pl="Otwórz narzędzie ↗"
+        data-desc-en="Two construction systems in one configurator. Design a straw-panel building — four walls, floor, roof and gable ends — broken into prefab panels with typological labels, a live bill of materials, cost estimate and an indicative heating demand. Or switch to Pizza Dome mode to generate a Goldberg-polyhedron mould. Click any panel to inspect dimensions and angles; export STL, JSON and a spec PDF."
+        data-desc-pl="Dwa systemy budowlane w jednym konfiguratorze. Zaprojektuj budynek ze słomianych paneli — cztery ściany, podłogę, dach i ściany szczytowe — rozbity na prefabrykowane panele z etykietami typologicznymi, żywym zestawieniem materiałów (BOM), szacunkiem kosztów i orientacyjnym zapotrzebowaniem na ciepło. Albo przełącz na tryb Pizza Dome, by wygenerować formę wielościanu Goldberga. Kliknij dowolny panel, by sprawdzić wymiary i kąty; eksportuj STL, JSON i PDF specyfikacji.">
+        <span class="mini-meta"></span><span class="mini-title"></span>
       </button>
-      <button class="mini-card"
-        data-img="img/tool-sitefit.png" data-meta="Tool · Geospatial" data-title="SiteFit"
-        data-link="https://enklava.co/tools/sitefit/" data-linklabel="Open the tool ↗"
-        data-desc="Plot feasibility before you commit. Import a parcel by number (ULDK) or draw it, then derive the buildable envelope and the key indicators — coverage, intensity, biologically-active area, setbacks — straight from the planning rules, with every number traceable to its legal source.">
-        <span class="mini-meta">Tool · Geospatial</span><span class="mini-title">SiteFit</span>
+      <button class="mini-card" data-img="img/tool-sitefit.png"
+        data-link="https://enklava.co/tools/sitefit/"
+        data-meta-en="Tool · Geospatial" data-meta-pl="Narzędzie · Geoprzestrzenne"
+        data-title-en="SiteFit" data-title-pl="SiteFit"
+        data-linklabel-en="Open the tool ↗" data-linklabel-pl="Otwórz narzędzie ↗"
+        data-desc-en="Plot feasibility before you commit. Import a parcel by number (ULDK) or draw it, then derive the buildable envelope and the key indicators — coverage, intensity, biologically-active area, setbacks — straight from the planning rules, with every number traceable to its legal source."
+        data-desc-pl="Chłonność działki, zanim się zwiążesz. Zaimportuj działkę po numerze (ULDK) lub narysuj ją, a potem wyprowadź obwiednię zabudowy i kluczowe wskaźniki — powierzchnię zabudowy, intensywność, powierzchnię biologicznie czynną, linie zabudowy — wprost z przepisów, z każdą liczbą prześledzalną do źródła prawnego.">
+        <span class="mini-meta"></span><span class="mini-title"></span>
       </button>
-      <button class="mini-card"
-        data-img="img/tool-atu.png" data-meta="Write-up · Data" data-title="ATU offline kit"
-        data-link="https://enklava.co/files/atu-offline-kit-JkkT/" data-linklabel="Read it ↗"
-        data-desc="What “self-hosting the data layer” actually looks like. A portable, offline, off-grid tech stack that gives you your own internet — knowledge, files, media, maps, local AI and comms — at ~30 W, a week per charge, indefinitely with solar. Full hardware + software stack with real prices.">
-        <span class="mini-meta">Write-up · Data</span><span class="mini-title">ATU offline kit</span>
+      <button class="mini-card" data-img="img/tool-atu.png"
+        data-link="https://enklava.co/files/atu-offline-kit-JkkT/"
+        data-meta-en="Write-up · Data" data-meta-pl="Opracowanie · Dane"
+        data-title-en="ATU offline kit" data-title-pl="Zestaw offline ATU"
+        data-linklabel-en="Read it ↗" data-linklabel-pl="Czytaj ↗"
+        data-desc-en="What “self-hosting the data layer” actually looks like. A portable, offline, off-grid tech stack that gives you your own internet — knowledge, files, media, maps, local AI and comms — at ~30 W, a week per charge, indefinitely with solar. Full hardware + software stack with real prices."
+        data-desc-pl="Jak naprawdę wygląda „self-hosting warstwy danych”. Przenośny, offline'owy i off-gridowy stos technologiczny, który daje Ci własny internet — wiedzę, pliki, media, mapy, lokalne AI i komunikację — przy ~30 W, tydzień na ładowaniu, bezterminowo z panelem słonecznym. Pełny stos sprzętu i oprogramowania z realnymi cenami.">
+        <span class="mini-meta"></span><span class="mini-title"></span>
       </button>
-      <button class="mini-card"
-        data-img="img/tool-pilot.png" data-meta="Pilot · Due diligence" data-title="Sławek · Józefów"
-        data-link="https://enklava.co/files/slawek-jozefow-dd-analiza-ghkY/" data-linklabel="Read it ↗"
-        data-desc="The method on a real plot, not a hypothetical. A due-diligence analysis for Sławek's site in Józefów — the structured way we turn a raw parcel and its constraints into clear, decision-ready findings.">
-        <span class="mini-meta">Pilot · Due diligence</span><span class="mini-title">Sławek · Józefów</span>
+      <button class="mini-card" data-img="img/tool-pilot.png"
+        data-link="https://enklava.co/files/slawek-jozefow-dd-analiza-ghkY/"
+        data-meta-en="Pilot · Due diligence" data-meta-pl="Pilotaż · Due diligence"
+        data-title-en="Sławek · Józefów" data-title-pl="Sławek · Józefów"
+        data-linklabel-en="Read it ↗" data-linklabel-pl="Czytaj ↗"
+        data-desc-en="The method on a real plot, not a hypothetical. A due-diligence analysis for Sławek's site in Józefów — the structured way we turn a raw parcel and its constraints into clear, decision-ready findings."
+        data-desc-pl="Metoda na realnej działce, nie hipotetycznej. Analiza due-diligence działki Sławka w Józefowie — ustrukturyzowany sposób, w jaki surową działkę i jej ograniczenia zamieniamy w jasne, gotowe do decyzji wnioski.">
+        <span class="mini-meta"></span><span class="mini-title"></span>
       </button>
     </div>
     <div class="display" id="toolsDisplay">
@@ -214,35 +235,54 @@
 </div></section>
 
 <section id="tech"><div class="wrap">
-  <div class="kicker">The tech</div>
-  <h2>Tech overview — the infrastructure we develop.</h2>
-  <p class="sub">A home runs on a few systems. We build open, low-dependency answers for each, so you can own and self-host them. Pick a layer.</p>
+  <div class="kicker" data-i18n="tech_kicker">The tech</div>
+  <h2 data-i18n="tech_h2">Tech overview — the infrastructure we develop.</h2>
+  <p class="sub" data-i18n="tech_sub">A home runs on a few systems. We build open, low-dependency answers for each, so you can own and self-host them. Pick a layer.</p>
   <div class="ov" data-display="techDisplay">
     <div class="mini-grid c3">
-      <button class="mini-card" data-img="img/layer-structure.png" data-icon="🧱" data-meta="Structure" data-title="StrawPanel" data-status="live"
-        data-desc="Our load-bearing envelope: prefab straw panels (twin-stud frame, straw infill, plywood plates) for walls, floor, roof and gable ends. Designed, panelised and costed in the configurator — our own catalogue, with EcoCocon only as a reference.">
-        <span class="mini-meta">Structure <span class="pill live">Live</span></span><span class="mini-title">StrawPanel envelope</span>
+      <button class="mini-card" data-img="img/layer-structure.png" data-icon="🧱" data-status="live"
+        data-meta-en="Structure" data-meta-pl="Struktura"
+        data-title-en="StrawPanel envelope" data-title-pl="Obwiednia StrawPanel"
+        data-desc-en="Our load-bearing envelope: prefab straw panels (twin-stud frame, straw infill, plywood plates) for walls, floor, roof and gable ends. Designed, panelised and costed in the configurator — our own catalogue, with EcoCocon only as a reference."
+        data-desc-pl="Nasza obwiednia nośna: prefabrykowane panele słomiane (rama dwusłupkowa, wypełnienie słomą, płyty ze sklejki) na ściany, podłogę, dach i szczyty. Projektowane, panelizowane i wyceniane w konfiguratorze — nasz własny katalog, z EcoCocon tylko jako referencją.">
+        <span class="mini-meta"></span><span class="mini-title"></span>
       </button>
-      <button class="mini-card" data-img="img/layer-energy.png" data-icon="⚡" data-meta="Energy" data-title="Power" data-status="soon"
-        data-desc="Your own grid: solar harvest, battery storage and an honest power budget so the home runs off-grid. In development.">
-        <span class="mini-meta">Energy <span class="pill soon">In dev</span></span><span class="mini-title">Power</span>
+      <button class="mini-card" data-img="img/layer-energy.png" data-icon="⚡" data-status="soon"
+        data-meta-en="Energy" data-meta-pl="Energia"
+        data-title-en="Power" data-title-pl="Energia"
+        data-desc-en="Your own grid: solar harvest, battery storage and an honest power budget so the home runs off-grid. In development."
+        data-desc-pl="Twoja własna sieć: zbiór energii słonecznej, magazyn w akumulatorach i uczciwy bilans mocy, by dom działał off-grid. W budowie.">
+        <span class="mini-meta"></span><span class="mini-title"></span>
       </button>
-      <button class="mini-card" data-img="img/layer-water.png" data-icon="💧" data-meta="Water" data-title="Water" data-status="soon"
-        data-desc="Rainwater capture, filtration and greywater reuse with storage — reducing or removing dependence on mains. In development.">
-        <span class="mini-meta">Water <span class="pill soon">In dev</span></span><span class="mini-title">Water</span>
+      <button class="mini-card" data-img="img/layer-water.png" data-icon="💧" data-status="soon"
+        data-meta-en="Water" data-meta-pl="Woda"
+        data-title-en="Water" data-title-pl="Woda"
+        data-desc-en="Rainwater capture, filtration and greywater reuse with storage — reducing or removing dependence on mains. In development."
+        data-desc-pl="Zbieranie deszczówki, filtracja i ponowne użycie szarej wody z magazynowaniem — ograniczenie lub zniesienie zależności od wodociągu. W budowie.">
+        <span class="mini-meta"></span><span class="mini-title"></span>
       </button>
-      <button class="mini-card" data-img="img/layer-sanitation.png" data-icon="♻️" data-meta="Sanitation" data-title="Sanitation" data-status="soon"
-        data-desc="Composting and closed-loop handling of waste — no dependence on mains sewage. In development.">
-        <span class="mini-meta">Sanitation <span class="pill soon">In dev</span></span><span class="mini-title">Sanitation</span>
+      <button class="mini-card" data-img="img/layer-sanitation.png" data-icon="♻️" data-status="soon"
+        data-meta-en="Sanitation" data-meta-pl="Sanitacja"
+        data-title-en="Sanitation" data-title-pl="Sanitacja"
+        data-desc-en="Composting and closed-loop handling of waste — no dependence on mains sewage. In development."
+        data-desc-pl="Kompostowanie i obieg zamknięty gospodarki odpadami — bez zależności od kanalizacji. W budowie.">
+        <span class="mini-meta"></span><span class="mini-title"></span>
       </button>
-      <button class="mini-card" data-img="img/layer-food.png" data-icon="🌱" data-meta="Food &amp; nutrients" data-title="Food &amp; nutrients" data-status="soon"
-        data-desc="Growing space and closing the nutrient loop back into the soil. In development.">
-        <span class="mini-meta">Food <span class="pill soon">In dev</span></span><span class="mini-title">Food &amp; nutrients</span>
+      <button class="mini-card" data-img="img/layer-food.png" data-icon="🌱" data-status="soon"
+        data-meta-en="Food &amp; nutrients" data-meta-pl="Żywność i składniki"
+        data-title-en="Food &amp; nutrients" data-title-pl="Żywność i składniki"
+        data-desc-en="Growing space and closing the nutrient loop back into the soil. In development."
+        data-desc-pl="Przestrzeń do uprawy i zamknięcie obiegu składników z powrotem do gleby. W budowie.">
+        <span class="mini-meta"></span><span class="mini-title"></span>
       </button>
-      <button class="mini-card" data-img="img/layer-data.png" data-icon="🛰️" data-meta="Data" data-title="Data &amp; compute" data-status="live"
-        data-link="https://enklava.co/files/atu-offline-kit-JkkT/" data-linklabel="See the ATU kit ↗"
-        data-desc="Self-hosted compute, knowledge and communications — the corner already proven in the ATU offline kit. Own your data.">
-        <span class="mini-meta">Data <span class="pill live">Live</span></span><span class="mini-title">Data &amp; compute</span>
+      <button class="mini-card" data-img="img/layer-data.png" data-icon="🛰️" data-status="live"
+        data-link="https://enklava.co/files/atu-offline-kit-JkkT/"
+        data-meta-en="Data" data-meta-pl="Dane"
+        data-title-en="Data &amp; compute" data-title-pl="Dane i obliczenia"
+        data-linklabel-en="See the ATU kit ↗" data-linklabel-pl="Zobacz zestaw ATU ↗"
+        data-desc-en="Self-hosted compute, knowledge and communications — the corner already proven in the ATU offline kit. Own your data."
+        data-desc-pl="Self-hostowane obliczenia, wiedza i komunikacja — róg już sprawdzony w zestawie ATU offline. Posiadaj swoje dane.">
+        <span class="mini-meta"></span><span class="mini-title"></span>
       </button>
     </div>
     <div class="display" id="techDisplay">
@@ -258,52 +298,108 @@
 </div></section>
 
 <section id="method" class="method"><div class="wrap">
-  <div class="kicker">The method</div>
-  <h2>Why this isn't another off-grid brand.</h2>
-  <p class="sub">“Control your resources” is everyone's pitch. Ours is the <em>how</em>:</p>
+  <div class="kicker" data-i18n="method_kicker">The method</div>
+  <h2 data-i18n="method_h2">Why this isn't another off-grid brand.</h2>
+  <p class="sub" data-i18n="method_sub">“Control your resources” is everyone's pitch. Ours is the <em>how</em>:</p>
   <ul>
-    <li><strong>Matrices over manifestos.</strong> Ten decision matrices give you the language and map to define your own requirements.</li>
-    <li><strong>You decide, specialists orchestrate.</strong> The expert integrates your requirements — they don't decide for you.</li>
-    <li><strong>Value is in the transition.</strong> Not a glossy artefact, but the support, structure and ecosystem trust that get you across.</li>
-    <li><strong>Build at home, share structurally.</strong> Proven on real builds, then opened as reusable structure — not bespoke one-offs.</li>
+    <li data-i18n="method_li1"><strong>Matrices over manifestos.</strong> Ten decision matrices give you the language and map to define your own requirements.</li>
+    <li data-i18n="method_li2"><strong>You decide, specialists orchestrate.</strong> The expert integrates your requirements — they don't decide for you.</li>
+    <li data-i18n="method_li3"><strong>Value is in the transition.</strong> Not a glossy artefact, but the support, structure and ecosystem trust that get you across.</li>
+    <li data-i18n="method_li4"><strong>Build at home, share structurally.</strong> Proven on real builds, then opened as reusable structure — not bespoke one-offs.</li>
   </ul>
 </div></section>
 
 <footer id="start"><div class="wrap">
-  <div class="kicker">Start</div>
-  <h2>Pick your level.</h2>
-  <p class="sub" style="margin:0 auto">Read for free, join a cohort to get clear, access the Lab to build it yourself, or apply to build with us.</p>
+  <div class="kicker" data-i18n="foot_kicker">Start</div>
+  <h2 data-i18n="foot_h2">Pick your level.</h2>
+  <p class="sub" style="margin:0 auto" data-i18n="foot_sub">Read for free, join a cohort to get clear, access the Lab to build it yourself, or apply to build with us.</p>
   <div class="cta-row" style="justify-content:center">
-    <a class="btn btn-primary" href="#proof">Explore the tools</a>
-    <a class="btn btn-ghost" href="#levels">See the levels</a>
+    <a class="btn btn-primary" href="#proof" data-i18n="foot_cta1">Explore the tools</a>
+    <a class="btn btn-ghost" href="#levels" data-i18n="foot_cta2">See the levels</a>
   </div>
-  <p class="foot-note">enklava.co · regenerative home ecosystem · v2 draft (staging, noindex)</p>
+  <p class="foot-note" data-i18n="foot_note">enklava.co · regenerative home ecosystem · v2 draft (staging, noindex)</p>
 </div></footer>
 
 <script>
 (function(){
-  document.querySelectorAll('[data-display]').forEach(function(group){
-    var disp=document.getElementById(group.dataset.display);
-    if(!disp) return;
-    var img=disp.querySelector('.display-img'),
-        meta=disp.querySelector('.display-meta'),
-        title=disp.querySelector('.display-title'),
-        desc=disp.querySelector('.display-desc'),
-        link=disp.querySelector('.display-link');
-    var cards=group.querySelectorAll('.mini-card');
-    function show(c){
-      cards.forEach(function(x){x.classList.remove('active');}); c.classList.add('active');
-      if(c.dataset.img){ img.classList.remove('icon'); img.textContent=''; img.style.backgroundImage='url('+c.dataset.img+')'; }
-      else { img.classList.add('icon'); img.style.backgroundImage=''; img.textContent=c.dataset.icon||''; }
-      meta.textContent=c.dataset.meta||'';
-      title.innerHTML=c.dataset.title||'';
-      desc.textContent=c.dataset.desc||'';
-      if(c.dataset.link){ link.style.display=''; link.href=c.dataset.link; link.textContent=c.dataset.linklabel||'Open ↗'; }
-      else { link.style.display='none'; }
+  var I18N={
+    en:{}, // English is the source in the HTML; on EN we restore from data-i18n-src
+    pl:{
+      draft:"SZKIC · Enklava v2 — w budowie (staging)",
+      nav_what:"Czym jest", nav_ways:"Wejścia", nav_tools:"Narzędzia", nav_tech:"Technologia", nav_method:"Metoda", nav_start:"Start",
+      hero_eyebrow:"Regeneratywny ekosystem domu",
+      hero_h1:"Dom na własnych<br>zasobach.",
+      hero_lead:"Dom, który daje Ci kontrolę nad własnymi zasobami — energią, wodą, żywnością, składnikami i danymi. Nie wynajmowanymi. Nie zdalnymi. Twoimi.",
+      hero_cta1:"Zobacz, jak działa →", hero_cta2:"Jak wejść",
+      prob_kicker:"Problem",
+      prob_h2:"Twoje życie działa na cudzej infrastrukturze.",
+      prob_sub:"Sieć energetyczna, wodociąg, supermarket, chmura. Wygodne — dopóki nie zawiodą. Każde to pojedynczy punkt awarii poza Twoją kontrolą: awarie, ceny, polityka, odległość. Domyślnie wynajmujesz własne podtrzymywanie życia od systemów, których nie widzisz.",
+      what_kicker:"Czym jest",
+      what_h2:"Enklava to ekosystem, nie produkt.",
+      what_sub:"Metoda, zestaw narzędzi i sieć, które prowadzą Cię od <em>„chcę żyć inaczej”</em> do zbudowanego, odpornego domu, który naprawdę rozumiesz i kontrolujesz. Kręgosłupem jest biblioteka matryc decyzyjnych, które zamieniają mgliste intencje w jasne wymagania — byś stał się osobą, która wie, czego chce.",
+      chip_structure:"Struktura", chip_energy:"Energia", chip_water:"Woda", chip_sanitation:"Sanitacja", chip_food:"Żywność i składniki", chip_data:"Dane",
+      lv_kicker:"Wejścia",
+      lv_h2:"Wejdź wg intencji — nie wg rangi.",
+      lv_sub:"Wybierz drzwi pasujące do tego, gdzie jesteś. Nic nie jest warunkiem wstępnym — ale jedno jest naszym flagowcem.",
+      lv1_tag:"Za darmo", lv1_h3:"Poznaj", lv1_p:"Przeglądaj wizję i żywe narzędzia — bez konta, bez zobowiązań. Po prostu się rozejrzyj.", lv1_cta:"Przeglądaj",
+      lv2_tag:"Labs · społeczność", lv2_h3:"Dołącz do społeczności", lv2_p:"Enklava Labs to społeczność — zostań członkiem zespołu build/dev: technologia, BOM, SOP-y, dokumentacja, inspiracja i ludzie. Dla ciekawych technologii i tych, którzy już mają klarowność.", lv2_cta:"Dołącz do Labs",
+      lv3_badge:"★ Nasz flagowiec", lv3_tag:"Ku-Gotowości", lv3_h3:"Zyskaj klarowność", lv3_p:"W budowie i musisz dobrze decydować? Głęboka praca — uporządkuj cały swój kontekst w jasne decyzje, w kohorcie.", lv3_cta:"Dołącz do kohorty",
+      lv4_tag:"Ultra-HT", lv4_h3:"Buduj z nami", lv4_p:"Gotów wdrażać we własnym kontekście, z wyselekcjonowanymi partnerami.", lv4_soon:"Wkrótce",
+      proof_kicker:"Dowód, nie slajdy", proof_h2:"Przegląd narzędzi.", proof_sub:"Działające oprogramowanie za wizją. Wybierz jedno — szczegóły otworzą się niżej.",
+      tech_kicker:"Technologia", tech_h2:"Przegląd technologii — infrastruktura, którą rozwijamy.", tech_sub:"Dom działa na kilku systemach. Budujemy otwarte, mało-zależne odpowiedzi dla każdego z nich, byś mógł je posiadać i hostować sam. Wybierz warstwę.",
+      method_kicker:"Metoda", method_h2:"Dlaczego to nie kolejna marka off-grid.", method_sub:"„Kontroluj swoje zasoby” to hasło każdego. Nasze jest <em>jak</em>:",
+      method_li1:"<strong>Matryce zamiast manifestów.</strong> Dziesięć matryc decyzyjnych daje Ci język i mapę, byś sam zdefiniował swoje wymagania.",
+      method_li2:"<strong>Ty decydujesz, specjaliści orkiestrują.</strong> Ekspert integruje Twoje wymagania — nie decyduje za Ciebie.",
+      method_li3:"<strong>Wartość jest w przejściu.</strong> Nie w lśniącym artefakcie, lecz we wsparciu, strukturze i zaufaniu ekosystemu, które przeprowadzają Cię na drugą stronę.",
+      method_li4:"<strong>Buduj u siebie, dziel się strukturalnie.</strong> Sprawdzone na realnych budowach, potem otwierane jako struktura wielokrotnego użytku — nie jednorazowe projekty.",
+      foot_kicker:"Start", foot_h2:"Wybierz swój poziom.", foot_sub:"Czytaj za darmo, dołącz do kohorty po klarowność, wejdź do Labs by zbudować samemu, albo aplikuj, by budować z nami.", foot_cta1:"Przeglądaj narzędzia", foot_cta2:"Zobacz wejścia", foot_note:"enklava.co · regeneratywny ekosystem domu · szkic v2 (staging, noindex)"
     }
-    cards.forEach(function(c){ c.addEventListener('click',function(){show(c);}); });
-    if(cards[0]) show(cards[0]); // default to first
+  };
+  // snapshot English source from the initial HTML
+  document.querySelectorAll('[data-i18n]').forEach(function(el){ I18N.en[el.dataset.i18n]=el.innerHTML; });
+
+  var LANG = localStorage.getItem('enklava_lang') || 'en';
+  function attr(el,field){ return el.getAttribute('data-'+field+'-'+LANG) || el.getAttribute('data-'+field) || ''; }
+  function pillText(s){ return LANG==='pl' ? (s==='live'?'Gotowe':'W budowie') : (s==='live'?'Live':'In dev'); }
+
+  function showCard(group,disp,c){
+    group.querySelectorAll('.mini-card').forEach(function(x){x.classList.remove('active');}); c.classList.add('active');
+    var img=disp.querySelector('.display-img'),meta=disp.querySelector('.display-meta'),title=disp.querySelector('.display-title'),desc=disp.querySelector('.display-desc'),link=disp.querySelector('.display-link');
+    if(c.dataset.img){img.classList.remove('icon');img.textContent='';img.style.backgroundImage='url('+c.dataset.img+')';}
+    else{img.classList.add('icon');img.style.backgroundImage='';img.textContent=c.dataset.icon||'';}
+    meta.textContent=attr(c,'meta'); title.innerHTML=attr(c,'title'); desc.textContent=attr(c,'desc');
+    if(c.dataset.link){link.style.display='';link.href=c.dataset.link;link.textContent=attr(c,'linklabel')||'↗';} else link.style.display='none';
+  }
+  function renderGroup(group){
+    var disp=document.getElementById(group.dataset.display);
+    var cards=group.querySelectorAll('.mini-card');
+    cards.forEach(function(c){
+      var mm=c.querySelector('.mini-meta'), mt=c.querySelector('.mini-title');
+      var st=c.dataset.status;
+      mm.innerHTML = attr(c,'meta') + (st? ' <span class="pill '+st+'">'+pillText(st)+'</span>':'');
+      mt.innerHTML = attr(c,'title');
+    });
+    var active=group.querySelector('.mini-card.active')||cards[0];
+    if(active) showCard(group,disp,active);
+  }
+  function applyStatic(){
+    document.querySelectorAll('[data-i18n]').forEach(function(el){
+      var v=(I18N[LANG]||{})[el.dataset.i18n];
+      if(v!=null) el.innerHTML=v;
+    });
+  }
+  function setLang(l){
+    LANG=l; localStorage.setItem('enklava_lang',l); document.documentElement.lang=l;
+    document.querySelectorAll('.lang button').forEach(function(b){ b.classList.toggle('on', b.dataset.lang===l); });
+    applyStatic();
+    document.querySelectorAll('[data-display]').forEach(renderGroup);
+  }
+
+  document.querySelectorAll('[data-display] .mini-card').forEach(function(c){
+    c.addEventListener('click',function(){ var g=c.closest('[data-display]'); showCard(g,document.getElementById(g.dataset.display),c); });
   });
+  document.querySelectorAll('.lang button').forEach(function(b){ b.addEventListener('click',function(){ setLang(b.dataset.lang); }); });
+  setLang(LANG);
 })();
 </script>
 
