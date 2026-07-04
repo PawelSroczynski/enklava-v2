@@ -488,7 +488,7 @@
   function computePhase(){const wrap=document.querySelector('.facet-wrap');if(!wrap)return;const rect=wrap.getBoundingClientRect();const r=curR(),w=Math.sqrt(3)*r;const gx=rect.left+scrollX+rect.width/2,gy=rect.top+scrollY+rect.height/2;const mod=(a,n)=>((a%n)+n)%n;OX=mod(gx-w/2,w);OY=mod(gy-0.75*r,3*r);}
   function gen(x0,y0,x1,y1,r){return cells(x0-OX,y0-OY,x1-OX,y1-OY,r).map(t=>t.map(a=>[a[0]+OX,a[1]+OY]));}
   function pts(t){return t.map(a=>a[0].toFixed(1)+','+a[1].toFixed(1)).join(' ');}
-  function renderBg(){const el=document.getElementById('bgmesh');if(!el)return;const W=innerWidth,H=Math.max(document.documentElement.scrollHeight,innerHeight);const g=gen(0,0,W,H,curR()).map(t=>`<polygon points="${pts(t)}"/>`).join('');el.innerHTML=`<svg width="${W}" height="${H}"><g fill="none" stroke="#b3812f" stroke-width="1.2" stroke-opacity="0.05">${g}</g></svg>`;}
+  function renderBg(){const el=document.getElementById('bgmesh');if(!el)return;const W=innerWidth,H=Math.max(document.documentElement.scrollHeight,innerHeight);const g=gen(0,0,W,H,curR()).map(t=>`<polygon points="${pts(t)}"/>`).join('');el.innerHTML=`<svg width="${W}" height="${H}"><g fill="none" stroke="#b3812f" stroke-width="1.2" stroke-opacity="0.055">${g}</g></svg>`;}
   function renderFacet(){const wrap=document.querySelector('.facet-wrap'),svg=document.getElementById('facet');if(!wrap||!svg)return;const rect=wrap.getBoundingClientRect();const W=Math.round(rect.width),H=Math.round(rect.height);if(!W||!H)return;const px=rect.left+scrollX,py=rect.top+scrollY;
     const r=curR(),w=Math.sqrt(3)*r;
     /* serce = 3 sześciokąty tej samej kraty (2 płatki + dolny) + romb z sąsiedniego heksa po każdej stronie talii */
