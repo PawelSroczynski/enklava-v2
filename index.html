@@ -69,29 +69,34 @@
   .g2{grid-template-columns:repeat(2,1fr)}.g3{grid-template-columns:repeat(3,1fr)}.g4{grid-template-columns:repeat(4,1fr)}
   @media(max-width:860px){.g3,.g4{grid-template-columns:repeat(2,1fr)}}
   @media(max-width:560px){.g2,.g3,.g4{grid-template-columns:1fr}}
-  .card{background:var(--paper-hi);border:1px solid var(--line);border-top:2px solid var(--ochre);border-radius:var(--r);padding:22px 22px 20px;box-shadow:0 1px 0 rgba(255,255,255,.7) inset,0 18px 40px -30px rgba(37,29,10,.6);transition:.25s var(--ease)}
-  .card:hover{transform:translateY(-2px)}
-  .card h3{margin:.4em 0 .35em;font-family:var(--serif);font-weight:500;font-size:1.25rem;line-height:1.15}
+  .card{position:relative;background:var(--paper-hi);border:1px solid var(--line);border-radius:var(--r);padding:22px 24px 20px 26px;box-shadow:0 1px 0 rgba(255,255,255,.7) inset,0 18px 40px -30px rgba(37,29,10,.6);transition:.25s var(--ease)}
+  .card::before{content:"";position:absolute;left:0;top:16px;bottom:16px;width:3px;background:linear-gradient(var(--ochre),var(--ochre-deep));border-radius:3px}
+  .card:hover{transform:translateY(-2px);box-shadow:0 1px 0 rgba(255,255,255,.7) inset,0 22px 46px -26px rgba(37,29,10,.55)}
+  .card h3{margin:.5em 0 .35em;font-family:var(--serif);font-weight:500;font-size:1.35rem;line-height:1.12;letter-spacing:-.01em}
   .card p{color:var(--ink-soft);font-size:14px;margin:.2em 0}
   /* levels */
   .lvl{position:relative;display:flex;flex-direction:column}
   .lvl .tag{font-family:var(--mono);font-size:10.5px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--ochre-deep)}
   .lvl .ask{margin-top:auto;padding-top:16px}
-  .lvl .ask a{display:inline-flex;align-items:center;gap:8px;font-size:13.5px;font-weight:600;color:var(--ink);text-decoration:none;border:1px solid var(--line);border-radius:9px;padding:8px 14px;transition:.18s}
-  .lvl .ask a:hover{border-color:var(--ochre);color:var(--ochre-deep)}
+  .lvl .ask a{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:600;color:var(--ink);text-decoration:none;position:relative;padding-bottom:2px}
+  .lvl .ask a::after{content:"";position:absolute;left:0;right:100%;bottom:0;height:1.5px;background:var(--ochre);transition:right .35s var(--ease)}
+  .lvl .ask a:hover::after{right:0}
   .lvl .soon{color:var(--mut);font-family:var(--mono);font-size:11px;border:1px dashed var(--line);border-radius:9px;padding:8px 14px;display:inline-block}
   /* flagship */
   .flagship{border-color:var(--ochre);border-top-color:var(--ochre-deep);background:linear-gradient(180deg,var(--ochre-tint),var(--paper-hi));box-shadow:0 0 0 1px var(--ochre),var(--shadow)}
   .flag-badge{position:absolute;top:-11px;left:18px;background:var(--ochre);color:#fff;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;padding:4px 11px;border-radius:999px}
-  .flagship .ask a{background:var(--ochre);color:#fff;border-color:var(--ochre)}
+  .flagship .ask a{background:var(--ochre);color:#fff;border-radius:10px;padding:10px 16px}
+  .flagship .ask a::after{display:none}
   .flagship .ask a:hover{background:var(--ochre-deep);color:#fff}
   /* mini cards → shared display (master/detail) */
   .mini-grid{display:grid;gap:12px;margin-top:30px}
   .mini-grid.c4{grid-template-columns:repeat(4,1fr)}.mini-grid.c3{grid-template-columns:repeat(3,1fr)}
   @media(max-width:860px){.mini-grid.c4,.mini-grid.c3{grid-template-columns:repeat(2,1fr)}}
   @media(max-width:520px){.mini-grid.c4,.mini-grid.c3{grid-template-columns:1fr}}
-  .mini-card{text-align:left;background:var(--paper);border:1px solid var(--line);border-top:2px solid var(--ochre);border-radius:var(--r-sm);padding:14px 15px;cursor:pointer;color:var(--ink);font:inherit;display:flex;flex-direction:column;gap:6px;transition:.2s var(--ease)}
-  .mini-card:hover{transform:translateY(-2px);box-shadow:var(--shadow);border-top-color:var(--ochre-deep)}
+  .mini-card{text-align:left;position:relative;background:var(--paper);border:1px solid var(--line);border-radius:var(--r-sm);padding:14px 15px 14px 22px;cursor:pointer;color:var(--ink);font:inherit;display:flex;flex-direction:column;gap:6px;transition:.2s var(--ease)}
+  .mini-grid .mini-card::before{content:"";position:absolute;left:0;top:12px;bottom:12px;width:3px;background:linear-gradient(var(--ochre),var(--ochre-deep));border-radius:3px}
+  .mini-grid .mini-title{font-family:var(--serif);font-weight:500;font-size:16.5px}
+  .mini-card:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
   .mini-card.active{background:var(--paper-hi);border-color:var(--ochre);box-shadow:0 0 0 1px var(--ochre),0 12px 30px -18px rgba(37,29,10,.5)}
   .mini-meta{font-family:var(--mono);font-size:10.5px;color:var(--ochre-deep);letter-spacing:.1em;text-transform:uppercase;display:flex;align-items:center;gap:6px}
   .mini-title{font-size:15px;font-weight:600;line-height:1.3}
@@ -118,10 +123,41 @@
   footer .kicker{justify-content:center}
   footer h2{margin-bottom:.3em}
   .foot-note{color:var(--mut);font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;margin-top:30px}
-  .spine{display:flex;gap:9px;flex-wrap:wrap;margin-top:20px}
-  .chip{font-size:12.5px;font-weight:600;color:var(--ink-soft);background:var(--paper);border:1px solid var(--line);border-radius:20px;padding:6px 14px;display:inline-flex;align-items:center;gap:7px;transition:.18s}
-  .chip::before{content:"";width:9px;height:10px;background:var(--ochre);clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%)}
-  .chip:hover{border-color:var(--ochre)}
+  /* hero em */
+  h1 em{font-style:italic;color:var(--ochre-deep)}
+  /* system map */
+  .map-head{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-top:26px}
+  .map-lead{color:var(--ink-soft);font-size:1.05rem}
+  .map-tag{margin-left:auto;font-family:var(--mono);font-size:11px;color:var(--mut)}
+  @media(max-width:600px){.map-tag{display:none}}
+  .sysmap{width:100%;max-width:720px;margin:10px auto 0;display:block}
+  .sysmap svg{width:100%;height:auto;overflow:visible}
+  .edge{stroke:var(--ochre);stroke-opacity:.32;stroke-width:1.2}
+  .edge.spine{stroke-opacity:.5}
+  .node{cursor:default}
+  .node circle{fill:var(--paper-hi);stroke:var(--ink);stroke-width:1.6;transition:.25s var(--ease)}
+  .node .glyph{fill:var(--ochre-deep)}
+  .node text.lab{font-family:var(--sans);font-size:13px;font-weight:600;fill:var(--ink-soft);transition:.2s}
+  .node:hover circle{fill:var(--ochre);stroke:var(--ochre-deep)}
+  .node:hover .glyph{fill:#fff}
+  .node:hover text.lab{fill:var(--ink);font-weight:800}
+  .node.center circle{fill:var(--ink);stroke:var(--ink)}
+  .node.center text.lab{fill:#f4eddc;font-weight:700}
+  .node.center:hover circle{fill:var(--ochre-deep);stroke:var(--ochre-deep)}
+  .node.center:hover text.lab{fill:#fff}
+  .pulse{transform-origin:center;animation:pulse 3.4s var(--ease) infinite}
+  @keyframes pulse{0%,100%{opacity:.32;r:46}50%{opacity:0;r:66}}
+  /* layers table */
+  .tbl{width:100%;border-collapse:separate;border-spacing:0;margin-top:30px;font-size:14px;background:var(--paper);border:1px solid var(--line);border-radius:var(--r-sm);overflow:hidden}
+  .tbl th{text-align:left;background:var(--sand);font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ochre-deep);padding:10px 16px}
+  .tbl td{border-top:1px solid var(--line-soft);padding:12px 16px}
+  .tbl .c-st{text-align:right;white-space:nowrap}
+  tr.mini-card{display:table-row;background:none;border:0;padding:0;box-shadow:none}
+  tr.mini-card:hover{transform:none;box-shadow:none}
+  tr.mini-card:hover td{background:var(--paper-hi)}
+  tr.mini-card.active{background:none;border:0;box-shadow:none}
+  tr.mini-card.active td{background:var(--ochre-tint)}
+  tr.mini-card .mini-title{font-weight:600}
 </style>
 </head>
 <body>
@@ -147,9 +183,9 @@
 </div></nav>
 
 <header class="hero"><div class="wrap">
-  <div class="eyebrow" data-i18n="hero_eyebrow">Regenerative home ecosystem</div>
-  <h1 data-i18n="hero_h1">A home on<br>your own terms.</h1>
-  <p class="lead" data-i18n="hero_lead">A home that puts you in control of your own resources — energy, water, food, nutrients and data. Not rented. Not remote. Yours.</p>
+  <div class="eyebrow" data-i18n="hero_eyebrow">System · lifestyle · legacy</div>
+  <h1 data-i18n="hero_h1">A homestead as a<br><em>whole</em>, not a<br>shopping list.</h1>
+  <p class="lead" data-i18n="hero_lead">Energy, water, food and economics in one system. Calculated before you break ground.</p>
   <div class="cta-row">
     <a class="btn btn-primary" href="#proof" data-i18n="hero_cta1">See it working →</a>
     <a class="btn btn-ghost" href="#levels" data-i18n="hero_cta2">How you engage</a>
@@ -166,8 +202,9 @@
   <div class="kicker" data-i18n="what_kicker">What it is</div>
   <h2 data-i18n="what_h2">Enklava is an ecosystem, not a product.</h2>
   <p class="sub" data-i18n="what_sub">A method, a set of tools, and a network that take you from <em>“I want to live differently”</em> to a built, resilient home you actually understand and control. The spine is a library of decision matrices that turn vague intent into clear requirements — so you become the person who knows what they want.</p>
-  <div class="spine">
-    <span class="chip" data-i18n="chip_structure">Structure</span><span class="chip" data-i18n="chip_energy">Energy</span><span class="chip" data-i18n="chip_water">Water</span><span class="chip" data-i18n="chip_sanitation">Sanitation</span><span class="chip" data-i18n="chip_food">Food &amp; nutrients</span><span class="chip" data-i18n="chip_data">Data</span>
+  <div class="map-head"><span class="map-lead" data-i18n="what_map_lead">A homestead is one web of connections. Move one node and you feel the rest.</span><span class="map-tag" data-i18n="what_map_tag">connection map · hover a node</span></div>
+  <div class="sysmap" role="img" aria-label="Homestead system map: purpose and direction at the centre; economics, structure, energy, water, food and land around it">
+    <svg viewBox="0 0 640 440"><g id="edges"></g><g id="nodes"></g></svg>
   </div>
 </div></section>
 
@@ -264,52 +301,55 @@
   <h2 data-i18n="tech_h2">Tech overview — the infrastructure we develop.</h2>
   <p class="sub" data-i18n="tech_sub">A home runs on a few systems. We build open, low-dependency answers for each, so you can own and self-host them. Pick a layer.</p>
   <div class="ov" data-display="techDisplay">
-    <div class="mini-grid c3">
-      <button class="mini-card" data-img="img/layer-structure.png" data-icon="🧱" data-status="live"
+    <table class="tbl layers">
+      <thead><tr><th data-i18n="tech_th1">Layer</th><th data-i18n="tech_th2">System</th><th class="c-st" data-i18n="tech_th3">Status</th></tr></thead>
+      <tbody>
+      <tr class="mini-card" data-img="img/layer-structure.png" data-icon="🧱" data-status="live"
         data-meta-en="Structure" data-meta-pl="Struktura"
         data-title-en="StrawPanel envelope" data-title-pl="Obwiednia StrawPanel"
         data-desc-en="Our load-bearing envelope: prefab straw panels (twin-stud frame, straw infill, plywood plates) for walls, floor, roof and gable ends. Designed, panelised and costed in the configurator — our own catalogue, with EcoCocon only as a reference."
         data-desc-pl="Nasza obwiednia nośna: prefabrykowane panele słomiane (rama dwusłupkowa, wypełnienie słomą, płyty ze sklejki) na ściany, podłogę, dach i szczyty. Projektowane, panelizowane i wyceniane w konfiguratorze — nasz własny katalog, z EcoCocon tylko jako referencją.">
-        <span class="mini-meta"></span><span class="mini-title"></span>
-      </button>
-      <button class="mini-card" data-img="img/layer-energy.png" data-icon="⚡" data-status="soon"
+        <td><span class="mini-meta"></span></td><td><span class="mini-title"></span></td><td class="c-st"><span class="mini-status"></span></td>
+      </tr>
+      <tr class="mini-card" data-img="img/layer-energy.png" data-icon="⚡" data-status="soon"
         data-meta-en="Energy" data-meta-pl="Energia"
         data-title-en="Power" data-title-pl="Energia"
         data-desc-en="Your own grid: solar harvest, battery storage and an honest power budget so the home runs off-grid. In development."
         data-desc-pl="Twoja własna sieć: zbiór energii słonecznej, magazyn w akumulatorach i uczciwy bilans mocy, by dom działał off-grid. W budowie.">
-        <span class="mini-meta"></span><span class="mini-title"></span>
-      </button>
-      <button class="mini-card" data-img="img/layer-water.png" data-icon="💧" data-status="soon"
+        <td><span class="mini-meta"></span></td><td><span class="mini-title"></span></td><td class="c-st"><span class="mini-status"></span></td>
+      </tr>
+      <tr class="mini-card" data-img="img/layer-water.png" data-icon="💧" data-status="soon"
         data-meta-en="Water" data-meta-pl="Woda"
         data-title-en="Water" data-title-pl="Woda"
         data-desc-en="Rainwater capture, filtration and greywater reuse with storage — reducing or removing dependence on mains. In development."
         data-desc-pl="Zbieranie deszczówki, filtracja i ponowne użycie szarej wody z magazynowaniem — ograniczenie lub zniesienie zależności od wodociągu. W budowie.">
-        <span class="mini-meta"></span><span class="mini-title"></span>
-      </button>
-      <button class="mini-card" data-img="img/layer-sanitation.png" data-icon="♻️" data-status="soon"
+        <td><span class="mini-meta"></span></td><td><span class="mini-title"></span></td><td class="c-st"><span class="mini-status"></span></td>
+      </tr>
+      <tr class="mini-card" data-img="img/layer-sanitation.png" data-icon="♻️" data-status="soon"
         data-meta-en="Sanitation" data-meta-pl="Sanitacja"
         data-title-en="Sanitation" data-title-pl="Sanitacja"
         data-desc-en="Composting and closed-loop handling of waste — no dependence on mains sewage. In development."
         data-desc-pl="Kompostowanie i obieg zamknięty gospodarki odpadami — bez zależności od kanalizacji. W budowie.">
-        <span class="mini-meta"></span><span class="mini-title"></span>
-      </button>
-      <button class="mini-card" data-img="img/layer-food.png" data-icon="🌱" data-status="soon"
+        <td><span class="mini-meta"></span></td><td><span class="mini-title"></span></td><td class="c-st"><span class="mini-status"></span></td>
+      </tr>
+      <tr class="mini-card" data-img="img/layer-food.png" data-icon="🌱" data-status="soon"
         data-meta-en="Food &amp; nutrients" data-meta-pl="Żywność i składniki"
         data-title-en="Food &amp; nutrients" data-title-pl="Żywność i składniki"
         data-desc-en="Growing space and closing the nutrient loop back into the soil. In development."
         data-desc-pl="Przestrzeń do uprawy i zamknięcie obiegu składników z powrotem do gleby. W budowie.">
-        <span class="mini-meta"></span><span class="mini-title"></span>
-      </button>
-      <button class="mini-card" data-img="img/layer-data.png" data-icon="🛰️" data-status="live"
+        <td><span class="mini-meta"></span></td><td><span class="mini-title"></span></td><td class="c-st"><span class="mini-status"></span></td>
+      </tr>
+      <tr class="mini-card" data-img="img/layer-data.png" data-icon="🛰️" data-status="live"
         data-link="https://enklava.co/files/atu-offline-kit-JkkT/"
         data-meta-en="Data" data-meta-pl="Dane"
         data-title-en="Data &amp; compute" data-title-pl="Dane i obliczenia"
         data-linklabel-en="See the ATU kit ↗" data-linklabel-pl="Zobacz zestaw ATU ↗"
         data-desc-en="Self-hosted compute, knowledge and communications — the corner already proven in the ATU offline kit. Own your data."
         data-desc-pl="Self-hostowane obliczenia, wiedza i komunikacja — róg już sprawdzony w zestawie ATU offline. Posiadaj swoje dane.">
-        <span class="mini-meta"></span><span class="mini-title"></span>
-      </button>
-    </div>
+        <td><span class="mini-meta"></span></td><td><span class="mini-title"></span></td><td class="c-st"><span class="mini-status"></span></td>
+      </tr>
+      </tbody>
+    </table>
     <div class="display" id="techDisplay">
       <div class="display-img"></div>
       <div class="display-body">
@@ -352,9 +392,9 @@
     pl:{
       draft:"SZKIC · Enklava v2 — w budowie (staging)",
       nav_what:"Czym jest", nav_ways:"Wejścia", nav_tools:"Narzędzia", nav_tech:"Technologia", nav_method:"Metoda", nav_start:"Start",
-      hero_eyebrow:"Regeneratywny ekosystem domu",
-      hero_h1:"Dom na własnych<br>zasadach.",
-      hero_lead:"Dom, który daje Ci kontrolę nad własnymi zasobami — energią, wodą, żywnością, składnikami i danymi. Nie wynajmowanymi. Nie zdalnymi. Twoimi.",
+      hero_eyebrow:"System · styl życia · dziedzictwo",
+      hero_h1:"Siedlisko jako<br><em>całość</em>, nie<br>lista zakupów.",
+      hero_lead:"Energia, woda, żywność i ekonomia w jednym systemie. Policzone, zanim wbijesz łopatę.",
       hero_cta1:"Zobacz, jak działa →", hero_cta2:"Jak wejść",
       prob_kicker:"Problem",
       prob_h2:"Twoje życie działa na cudzej infrastrukturze.",
@@ -362,7 +402,7 @@
       what_kicker:"Czym jest",
       what_h2:"Enklava to ekosystem, nie produkt.",
       what_sub:"Metoda, zestaw narzędzi i sieć, które prowadzą Cię od <em>„chcę żyć inaczej”</em> do zbudowanego, odpornego domu, który naprawdę rozumiesz i kontrolujesz. Kręgosłupem jest biblioteka matryc decyzyjnych, które zamieniają mgliste intencje w jasne wymagania — byś stał się osobą, która wie, czego chce.",
-      chip_structure:"Struktura", chip_energy:"Energia", chip_water:"Woda", chip_sanitation:"Sanitacja", chip_food:"Żywność i składniki", chip_data:"Dane",
+      what_map_lead:"Siedlisko to jedna sieć powiązań. Ruszysz jeden węzeł, a poczujesz resztę.", what_map_tag:"mapa powiązań · najedź na węzeł",
       lv_kicker:"Wejścia",
       lv_h2:"Zacznij tam, gdzie jesteś.",
       lv_sub:"Cały stack jest otwarty dla każdego. Poza źródłem wejdź tak głęboko, jak chcesz — społeczność, kohorta albo jeden na jeden. Każde wejście jest samodzielne — nie musisz iść po kolei.",
@@ -371,7 +411,7 @@
       lv3_badge:"★ Nasz flagowiec", lv3_tag:"Kohorta", lv3_h3:"Enklava Activation", lv3_p:"Intensywne przygotowanie do budowy na własnej działce: bezpieczna droga przez gąszcz decyzji, ograniczeń prawnych i wyborów techniczno-architektonicznych — razem z Twoją kohortą.", lv3_cta:"Aplikuj do kohorty",
       lv4_tag:"1:1", lv4_h3:"Enklava Delivery", lv4_p:"Najgłębszy poziom: jeden na jeden. Powołujemy Twoje siedlisko do życia razem — z Tobą i wyselekcjonowanymi partnerami. Decyzje stają się żywym miejscem.", lv4_soon:"Dla absolwentów Activation",
       proof_kicker:"Dowód, nie slajdy", proof_h2:"Przegląd narzędzi.", proof_sub:"Działające oprogramowanie za wizją. Wybierz jedno — szczegóły otworzą się niżej.",
-      tech_kicker:"Technologia", tech_h2:"Przegląd technologii — infrastruktura, którą rozwijamy.", tech_sub:"Dom działa na kilku systemach. Budujemy otwarte, mało-zależne odpowiedzi dla każdego z nich, byś mógł je posiadać i hostować sam. Wybierz warstwę.",
+      tech_kicker:"Technologia", tech_th1:"Warstwa", tech_th2:"System", tech_th3:"Status", tech_h2:"Przegląd technologii — infrastruktura, którą rozwijamy.", tech_sub:"Dom działa na kilku systemach. Budujemy otwarte, mało-zależne odpowiedzi dla każdego z nich, byś mógł je posiadać i hostować sam. Wybierz warstwę.",
       method_kicker:"Metoda", method_h2:"Dlaczego to nie kolejna marka off-grid.", method_sub:"„Kontroluj swoje zasoby” to hasło każdego. Nasze jest <em>jak</em>:",
       method_li1:"<strong>Matryce zamiast manifestów.</strong> Dziesięć matryc decyzyjnych daje Ci język i mapę, byś sam zdefiniował swoje wymagania.",
       method_li2:"<strong>Ty decydujesz, specjaliści orkiestrują.</strong> Ekspert integruje Twoje wymagania — nie decyduje za Ciebie.",
@@ -400,8 +440,9 @@
     var cards=group.querySelectorAll('.mini-card');
     cards.forEach(function(c){
       var mm=c.querySelector('.mini-meta'), mt=c.querySelector('.mini-title');
-      var st=c.dataset.status;
-      mm.innerHTML = attr(c,'meta') + (st? ' <span class="pill '+st+'">'+pillText(st)+'</span>':'');
+      var st=c.dataset.status, ms=c.querySelector('.mini-status');
+      if(ms){ mm.innerHTML=attr(c,'meta'); ms.innerHTML=st?'<span class="pill '+st+'">'+pillText(st)+'</span>':''; }
+      else { mm.innerHTML = attr(c,'meta') + (st? ' <span class="pill '+st+'">'+pillText(st)+'</span>':''); }
       mt.innerHTML = attr(c,'title');
     });
     var active=group.querySelector('.mini-card.active')||cards[0];
@@ -418,6 +459,7 @@
     document.querySelectorAll('.lang button').forEach(function(b){ b.classList.toggle('on', b.dataset.lang===l); });
     applyStatic();
     document.querySelectorAll('[data-display]').forEach(renderGroup);
+    if(window.renderSysmap) window.renderSysmap(l);
   }
 
   document.querySelectorAll('[data-display] .mini-card').forEach(function(c){
@@ -437,6 +479,47 @@
   function render(){var el=document.getElementById('bgmesh');if(!el)return;var W=innerWidth,H=Math.max(document.documentElement.scrollHeight,innerHeight);var g=cells(0,0,W,H,curR()).map(function(t){return '<polygon points="'+pts(t)+'"/>';}).join('');el.innerHTML='<svg width="'+W+'" height="'+H+'"><g fill="none" stroke="#b3812f" stroke-width="1.2" stroke-opacity="0.05">'+g+'</g></svg>';}
   var to;addEventListener('resize',function(){clearTimeout(to);to=setTimeout(render,80);});
   addEventListener('load',render);render();
+})();
+</script>
+
+<script>
+(function(){
+  var L={
+    en:{outer:['Economics','Structure','Energy','Water','Food','Land'],center:['Purpose &','direction']},
+    pl:{outer:['Ekonomia','Struktura','Energia','Woda','Żywność','Ziemia'],center:['Sens i','kierunek']}
+  };
+  var NS='http://www.w3.org/2000/svg',cx=320,cy=210,R=155;
+  function render(lang){
+    var eg=document.getElementById('edges'),nd=document.getElementById('nodes');
+    if(!eg||!nd)return;
+    var t=L[lang]||L.en;
+    eg.innerHTML='';nd.innerHTML='';
+    var outer=[0,60,120,180,240,300].map(function(a,i){var rad=(a-90)*Math.PI/180;return{x:cx+R*Math.cos(rad),y:cy+R*Math.sin(rad),t:t.outer[i]};});
+    function line(x1,y1,x2,y2,cls){var l=document.createElementNS(NS,'line');l.setAttribute('x1',x1);l.setAttribute('y1',y1);l.setAttribute('x2',x2);l.setAttribute('y2',y2);l.setAttribute('class',cls);eg.appendChild(l);}
+    outer.forEach(function(o,i){line(cx,cy,o.x,o.y,'edge spine');var n=outer[(i+1)%outer.length];line(o.x,o.y,n.x,n.y,'edge');});
+    var pl=document.createElementNS(NS,'circle');pl.setAttribute('cx',cx);pl.setAttribute('cy',cy);pl.setAttribute('r',46);pl.setAttribute('fill','#b3812f');pl.setAttribute('class','pulse');nd.appendChild(pl);
+    function node(x,y,label,center){
+      var g=document.createElementNS(NS,'g');g.setAttribute('class','node'+(center?' center':''));
+      var c=document.createElementNS(NS,'circle');c.setAttribute('cx',x);c.setAttribute('cy',y);c.setAttribute('r',center?44:14);g.appendChild(c);
+      if(center){
+        t.center.forEach(function(ln,i){var tt=document.createElementNS(NS,'text');tt.setAttribute('x',x);tt.setAttribute('y',y-2+i*15);tt.setAttribute('text-anchor','middle');tt.setAttribute('class','lab');tt.setAttribute('font-size','12.5');tt.textContent=ln;g.appendChild(tt);});
+      } else {
+        var hx=document.createElementNS(NS,'polygon'),sz=5;
+        var hp=[[0,-sz],[sz*0.87,-sz/2],[sz*0.87,sz/2],[0,sz],[-sz*0.87,sz/2],[-sz*0.87,-sz/2]].map(function(p){return [(x+p[0]).toFixed(1),(y+p[1]).toFixed(1)];});
+        hx.setAttribute('points',hp.map(function(p){return p.join(',');}).join(' '));hx.setAttribute('class','glyph');g.appendChild(hx);
+        var mid=Math.abs(x-cx)<3,tx,ty,anch;
+        if(mid){anch='middle';tx=x;ty=(y<cy)?y-20:y+28;}
+        else if(x>cx){anch='start';tx=x+22;ty=y+4;}
+        else{anch='end';tx=x-22;ty=y+4;}
+        var tt=document.createElementNS(NS,'text');tt.setAttribute('x',tx);tt.setAttribute('y',ty);tt.setAttribute('text-anchor',anch);tt.setAttribute('class','lab');tt.textContent=label;g.appendChild(tt);
+      }
+      nd.appendChild(g);
+    }
+    outer.forEach(function(o){node(o.x,o.y,o.t,false);});
+    node(cx,cy,'',true);
+  }
+  window.renderSysmap=render;
+  render(document.documentElement.lang||'en');
 })();
 </script>
 </body>
